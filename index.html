@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Audio Transcriptor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <p>Test</p>
+    <div class="group-box">
+      <h2>Authentication</h2>
+      <div class="contents">
+        <p>
+          <span>Username: </span>
+          <input type="text" id="username" size="60" required>
+        </p>
+        <p>
+          <span>Password: </span>
+          <input type="password" id="password" size="60" required>
+        </p>
+      </div>
+    </div>
+
+    <div class="group-box">
+      <h2>Options</h2>
+      <div class="contents">
+        <p>
+          <label for="model">Transcription model:&nbsp;</label>
+          <select name="model" id="model">
+            <option value="general" selected>General Purpose</option>
+            <option value="phonecall">Phone Call</option>
+            <option value="meeting">Meeting or Conference</option>
+          </select>
+        </p>
+        <p>
+          <label for="language">Language:&nbsp;</label>
+          <select name="language" id="language">
+            <option value="en-US" selected>English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="en-NZ">English (New Zealand)</option>
+            <option value="fr">French</option>
+            <option value="ko">Korean</option>
+            <option value="pt">Portuguese</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+            <option value="ru">Russian</option>
+            <option value="es">Spanish</option>
+          </select>
+        </p>
+        <p>
+          <input type="checkbox" id="punctuate" name="punctuate" value="punctuate" checked>
+          <label for="punctuate">Use punctuation</label>
+        </p>
+        <p>
+          <input type="checkbox" id="diarize" name="diarize" value="diarize">
+          <label for="diarize">Enable diarization</label>
+      </p>
+      </div>
+    </div>
+
+    <div class="group-box">
+      <h2>Audio&nbsp;Source</h2>
+        <div class="contents">
+          <p>
+            <span>Capture microphone (if supported): </span>
+            <input type="file" id="mic-input" capture="user" accept="audio/*">
+          </p>
+          <p>
+            <span>Choose an audio file: </span>
+            <input type="file" id="file-input" accept="audio/*">
+          </p>
+          <p>
+            <span>Enter audio URL: </span>
+            <input type="url" id="url" placeholder="Audio file URL" size="60">
+          </p>
+      </div>
+    </div>
+    <input id="transcribe" type="submit" value="Transcribe">
+    <div class="group-box">
+      <h2>Transcription</h2>
+      <div class="contents" id="transcription">
+      </div>
+    </div>
+
+    <div class="group-box">
+      <h2>Words</h2>
+      <div class="contents">
+        <table id="word-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Word</th>
+              <th>Start Time</th>
+              <th>Speaker</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

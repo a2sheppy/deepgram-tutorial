@@ -1,0 +1,65 @@
+body {
+  font: 16px Helvetica,Arial,sans-serif;
+  background-color: #ddf;
+}
+
+.group-box {
+  position:relative;
+  padding: 0.8em;
+  border: 1px solid #999;
+  max-width: 40em;
+  margin-bottom: 1.5em;
+}
+
+.group-box h2 {
+  position: relative;
+  font-size: 18px;
+  top: -22px;
+  background-color: #ddf;
+  padding: 0 0.25em;
+  display: inline;
+  margin: 0;
+}
+
+.contents *:first-child {
+    margin-top: 0;
+}
+
+#transcribe {
+    margin-bottom: 2em;
+}
+
+#transcription {
+    font-size: 18px;
+    background-color: #ddd;
+    border: 1px solid #999;
+    min-height: 30px;
+    padding: 0.8em 1em;
+}
+
+table#word-table {
+    width: 100%;
+    border: 1px solid #999;
+    border-collapse: collapse;
+}
+
+table#word-table thead {
+    background-color: #33b;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+table#word-table th {
+    padding: 0.2em;
+}
+
+table#word-table td {
+    text-align: left;
+    border: 1px solid #999;
+    padding: 0.1em;
+}
+
+table#word-table tr:nth-of-type(2n) {
+    background-color: rgba(0, 0, 0, 0.15);
+}
