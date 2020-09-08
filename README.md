@@ -8,7 +8,7 @@ To begin with, you’ll need API credentials. For this tutorial, we’ll be usin
 
 The speech recognition API is available at `https://brain.deepgram.com/v2/listen`. Simply use HTTP to [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) requests to that address. [Details on the API](https://docs.deepgram.com/#speech-recognition) are available in the Deepgram documentation.
 
-While the JavaScript for this example is included in this article, the HTML and CSS is not, other than a few key snippets. You can, however, [obtain the complete code](https://github.com/a2sheppy/deepgram-tutorial) for this example on GitHub.
+While the JavaScript for this example is included in this article, the HTML and CSS is not, other than a few key snippets. You can, however, [obtain the complete code](https://github.com/a2sheppy/deepgram-tutorial) for this example on GitHub. In addition, this web application, the [Audio Transcription Exerciser](https://a2sheppy.github.io/deepgram-tutorial/), is deployed on GitHub Pages, where you can try it out if you don't want to, or aren't able to, deploy it locally yourself.
 
 One good approach to this example is to try it out in your browser first, before reading more about how it works. This will let you experiment with the options supported by the example. With that in mind, before getting into how the example’s code works, let’s look at how to use it.
 
