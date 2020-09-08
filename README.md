@@ -262,7 +262,7 @@ Next, if a response was successfully received, we pull out the data and update t
 
 The Deepgram speech recognition API supports multiple audio channels, and for each channel, it may return multiple alternative transcriptions of the speech it recognizes, although we've used the `alternatives` parameter to limit the results to a single transcription. Thus, the [`ResultAlternative`](https://docs.deepgram.com/#ResultAlternative) object describing the first channel's first transcription is found in `xhrResponse.results.channels[0].alternatives[0]`.
 
-This object's `transcript` property is placed into the transcription box on the screen, and then we begin to process the `words` property, which is a list of Deepgram [`Word`](https://docs.deepgram.com/#Word)[^word-note] objects describing each word in the transcribed audio.
+This object's `transcript` property is placed into the transcription box on the screen, and then we begin to process the `words` property, which is a list of Deepgram [`Word`](https://docs.deepgram.com/#Word)[^apinote] objects describing each word in the transcribed audio.
 
 For each word in the list, we create a new HTML [`<tr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) element, as well as one [`<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) for each column: the word number, the word itself, the time offset at which the word began to be spoken, and the speaker's identifying number.
 
@@ -431,4 +431,4 @@ There are other URL parameters available when using the batch speech recognition
 
 There are plenty of other ways you can experiment with and use not just the API, but the data and the metadata returned by the Deepgram speech recognition AI.
 
-[^word-note]: Due to the way the Deepgram speech recognition API docs are currently constructed, links to specific objects' documentation don't currently work.
+[^apinote]: Due to the way the Deepgram speech recognition API docs are currently constructed, links to specific objects' documentation don't currently work.
