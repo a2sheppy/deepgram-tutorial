@@ -356,6 +356,8 @@ In the `load` event handler, we check the request's status. If it's a value betw
 
 In the error handler, we simply reject the promise with the `statusText` property. In a real-world application, of course, we'd do more than this, but it will do for this example.
 
+>_**Note:** The code on GitHub, as well as the deployed version of this example, also handles progress events to show a progress bar during the handling of the `XMLHttpRequest`. We'll ignore that here since it's just a user convenience._
+
 #### Sending the Request
 
 Finally, we open the request, configure it, and send it to the server.
@@ -392,7 +394,7 @@ Then we call the request object's [`open()`](https://developer.mozilla.org/en-US
 
 Next, we set the request's [`withCredentials`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials) property to `true`, to indicate that we're using credentials, and the [`responseType`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestResponseType) to `"json"` to let the browser know to parse the JSON response data into a JavaScript object.
 
-If the `data` option is available, it's an [`ArrayBuffer`]() filled with the audio file contents to be transcribed, so this is sent as the body of the HTTP request. Otherwise, a new `data` object is created with a `url` property containing the URL of the audio file on the internet.
+If the `data` option is available, it's an [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/API/ArrayBuffer) filled with the audio file contents to be transcribed, so this is sent as the body of the HTTP request. Otherwise, a new `data` object is created with a `url` property containing the URL of the audio file on the internet.
 
 And, finally, the request is sent to the API server by calling the request's [`send()`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send) method. When the response is returned by the server, the `load` event handler is called, and the promise resolves, returning the response to the caller.
 
@@ -402,7 +404,7 @@ That's the complete JavaScript code. With the explanations provided above and th
 
 ### Use the Word List
 
-The transcription's `words` property, as previously mentioned, contains one object for each word in the transcription, in spoken order. Each object provides the word itself, as well as both the time at which the speaker began to say the word, and when they finished saying it. Additionally, if the `diarize` option was enabled, each speaker is identified by a unique ID number.
+The transcription's `words` property, as previously mentioned, contains one `Word` object for each word in the transcription, in spoken order. Each object provides the word itself, as well as both the time at which the speaker began to say the word, and when they finished saying it. Additionally, if the `diarize` option was enabled, each speaker is identified by a unique ID number.
 
 This opens up interesting possibilities. You can use the word list and the speaker numbers to construct a version of the transcript that looks more like a script, with each speaker identified as the text progresses:
 

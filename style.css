@@ -76,3 +76,20 @@ input[type="checkbox"] {
 .sublabel {
     font-size: 70%;
 }
+
+/* The transcribe button bar */
+
+.button-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em;
+    width: 100%;
+}
+
+.bar-box {
+
+}
+
+.bar-box progress {
+    width: 100%;
+}

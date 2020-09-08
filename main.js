@@ -135,16 +135,33 @@ function sendDeepgramRequest(options) {
         }
 
         request.onload = () => {
+            let progressElem = document.querySelector("progress");
+
             if (request.status >= 200 && request.status < 300) {
                 resolve(request.response);
             } else {
                 reject(request.statusText);
             }
+
+            progressElem.max = 0;
+            progressElem.value = 0;
         };
 
         request.onerror = () => {
             reject(request.statusText);
         }
+
+        // Watch for upload progress events
+
+        request.upload.addEventListener("loadstart", uploadProgress);
+        request.upload.addEventListener("progress", uploadProgress);
+        request.upload.addEventListener("loadend", uploadProgress);
+
+        // Watch for download progress events
+
+        request.addEventListener("loadstart", downloadProgress);
+        request.addEventListener("progress", downloadProgress);
+        request.addEventListener("loadend", downloadProgress);
 
         let requestUrl = `${kDeepgramURL}${paramString}`;
 
@@ -165,4 +182,36 @@ function sendDeepgramRequest(options) {
 
         request.send(data);
     });
+}
+
+function downloadProgress(event) {
+    let progressElem = document.querySelector("progress");
+    let labelElem = document.getElementById("progress-label");
+
+    switch(event.type) {
+        case "loadstart":
+            labelElem.innerText = "Receiving results...";
+            break;
+        case "loadend":
+            labelElem.innerText = "Progress:";
+            break;
+    }
+    progressElem.value = event.loaded;
+    progressElem.max = event.total;
+}
+
+function uploadProgress(event) {
+    let progressElem = document.querySelector("progress");
+    let labelElem = document.getElementById("progress-label");
+
+    switch(event.type) {
+        case "loadstart":
+            labelElem.innerText = "Sending request...";
+            break;
+        case "loadend":
+            labelElem.innerText = "Letting the AI think about it...";
+            break;
+    }
+    progressElem.value = event.loaded;
+    progressElem.max = event.total;
 }

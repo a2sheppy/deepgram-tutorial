@@ -83,7 +83,17 @@
           </p>
       </div>
     </div>
-    <input id="transcribe" type="submit" value="Transcribe">
+
+    <div class="button-bar">
+      <div class="bar-box">
+        <input id="transcribe" type="submit" value="Transcribe">
+      </div>
+      <div class="bar-box">
+        <div id="progress-label">Progress:</div>
+        <progress max="0" value="0"></progress>
+      </div>
+    </div>
+
     <div class="group-box">
       <h2>Transcription</h2>
       <div class="contents" id="transcription">
