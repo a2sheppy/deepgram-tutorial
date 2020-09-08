@@ -1,12 +1,17 @@
 <!doctype html>
 <html>
   <head>
-    <title>Audio Transcriptor</title>
+    <title>Audio Transcription Exerciser</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
   </head>
   <body>
-    <p>Test</p>
+    <h1>Audio Transcription Exerciser</h1>
+    <p>
+      This example, which is <a href="https://github.com/a2sheppy/deepgram-tutorial">available on GitHub</a>,
+      lets you test various configurations and options when using the Deepgram speech recognition API in
+      <em>batch mode</em>, which processes prerecorded audio rather than streamed audio.
+    </p>
     <div class="group-box">
       <h2>Authentication</h2>
       <div class="contents">
@@ -52,7 +57,11 @@
         </p>
         <p>
           <input type="checkbox" id="diarize" name="diarize" value="diarize">
-          <label for="diarize">Enable diarization</label>
+          <label for="diarize">
+            <span class="label">Enable diarization<br/>
+              <span class="sublabel">(Identify speakers)</span>
+            </span>
+          </label>
       </p>
       </div>
     </div>
@@ -89,7 +98,7 @@
             <tr>
               <th>#</th>
               <th>Word</th>
-              <th>Start Time</th>
+              <th>Start Time (sec)</th>
               <th>Speaker</th>
             </tr>
           </thead>

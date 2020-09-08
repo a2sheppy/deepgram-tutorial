@@ -1,6 +1,7 @@
 body {
   font: 16px Helvetica,Arial,sans-serif;
   background-color: #ddf;
+  max-width: 40em;
 }
 
 .group-box {
@@ -62,4 +63,16 @@ table#word-table td {
 
 table#word-table tr:nth-of-type(2n) {
     background-color: rgba(0, 0, 0, 0.15);
+}
+
+input[type="checkbox"] {
+    vertical-align: top;
+}
+
+.label {
+    display: inline-block;
+}
+
+.sublabel {
+    font-size: 70%;
 }

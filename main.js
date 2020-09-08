@@ -7,7 +7,6 @@ function start() {
 }
 
 async function transcribe() {
-    console.log("Starting to transcribe...");
     let inUsername = document.getElementById("username").value;
     let inPassword = document.getElementById("password").value;
     let inPunctuate = document.getElementById("punctuate").checked;
@@ -16,7 +15,7 @@ async function transcribe() {
     let inLanguage = document.getElementById("language").value;
 
     let inURL = document.getElementById("url").value;
-    let file = null;
+    let inFile = null;
 
     document.getElementById("transcription").innerText = "";
     document.querySelector("table#word-table tbody").innerHTML = "";
@@ -27,54 +26,51 @@ async function transcribe() {
         let input = document.getElementById("mic-input");
 
         if (input.files) {
-            file = input.files[0];
+            inFile = input.files[0];
         }
-        if (!file) {
+        if (!inFile) {
             input = document.getElementById("file-input");
-            console.log("INPUT:");
-            console.dir("input")
     
             if (input.files) {
-                file = input.files[0];
+                inFile = input.files[0];
             }
         }
     }
-
-    console.log("FILE:");
-    console.dir(file);
 
     let options = {
         username: inUsername,
         password: inPassword,
         model: inModel,
-        language: inLanguage
+        language: inLanguage,
+        punctuate: inPunctuate ? "true" : "false",
+        diarize: inDiarize ? "true" : "false",
+        alternatives: 1         /* always only get one alternative */
     };
-
-    if (inPunctuate) {
-        options.punctuate = "true";
-    }
-
-    if (inDiarize) {
-        options.diarize = "true";
-    }
 
     if (inURL) {
         options.url = inURL;
     }
 
-    if (file) {
-        let audioData = await file.arrayBuffer();
+    if (inFile) {
+        let audioData = await inFile.arrayBuffer();
         
         if (audioData) {
             options.data = audioData;
         }
     }
 
-    try {
-        let result = await sendDeepgramRequest(options);
-        document.getElementById("transcription").innerText = result.results.channels[0].alternatives[0].transcript;
+    let xhrResponse;
 
-        let words = result.results.channels[0].alternatives[0].words;
+    try {
+        xhrResponse = await sendDeepgramRequest(options);
+    } catch(e) {
+        document.getElementById("transcription").innerHTML = `<span style="color: red">${e}`;
+    }
+
+    if (xhrResponse) {
+        document.getElementById("transcription").innerText = xhrResponse.results.channels[0].alternatives[0].transcript;
+
+        let words = xhrResponse.results.channels[0].alternatives[0].words;
         let tbody = document.querySelector("table#word-table tbody");
 
         words.forEach((word, index) => {
@@ -87,15 +83,13 @@ async function transcribe() {
             numCell.innerText = index + 1;
             wordCell.innerText = word.word;
             startCell.innerText = word.start;
-            speakerCell.innerText = word.speaker;
+            speakerCell.innerText = (word.speaker + 1) || "n/a";
             row.appendChild(numCell);
             row.appendChild(wordCell);
             row.appendChild(startCell);
             row.appendChild(speakerCell);
             tbody.appendChild(row);
         });
-    } catch(e) {
-        document.getElementById("transcription").innerHTML = `<span style="color: red">${e}`;
     }
 }
 
@@ -140,28 +134,24 @@ function sendDeepgramRequest(options) {
             }
         }
 
+        request.onload = () => {
+            if (request.status >= 200 && request.status < 300) {
+                resolve(request.response);
+            } else {
+                reject(request.statusText);
+            }
+        };
+
+        request.onerror = () => {
+            reject(request.statusText);
+        }
+
         let requestUrl = `${kDeepgramURL}${paramString}`;
 
         request.open("POST", requestUrl);
         request.setRequestHeader("Authorization", "Basic " + btoa(`${username}:${password}`));
         request.withCredentials = true;
         request.responseType = "json";
-
-        request.onload = () => {
-            if (request.status >= 200 && request.status < 300) {
-                resolve(request.response);
-            } else {
-                //if (request.status !== 400) {
-                    reject(request.statusText);
-                //}
-            }
-        };
-
-        request.onerror = () => {
-            //if (request.status !== 400) {
-                reject(request.statusText);
-            //}
-        }
 
         // If no data, use the URL field's value
 
