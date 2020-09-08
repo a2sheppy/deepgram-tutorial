@@ -233,7 +233,8 @@ Next, if a response was successfully received, we pull out the data and update t
 
 ```javascript
     if (xhrResponse) {
-        document.getElementById("transcription").innerText = xhrResponse.results.channels[0].alternatives[0].transcript;
+        document.getElementById("transcription").innerText =
+                    xhrResponse.results.channels[0].alternatives[0].transcript;
 
         let words = xhrResponse.results.channels[0].alternatives[0].words;
         let tbody = document.querySelector("table#word-table tbody");
